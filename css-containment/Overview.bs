@@ -9,7 +9,7 @@ ED: http://dev.w3.org/csswg/css-containment/
 Editor: Tab Atkins, Google, http://xanthir.com/contact/
 Abstract: This CSS module describes the 'contain' property, which indicates that the element's subtree is independent of the rest of the page. This enables heavy optimizations by user agents when used well.
 Ignored Terms: scrollWidth, scrollHeight, clientWidth, clientHeight, formatting context
-Link Defaults: css-lists-3 (property) counter-increment
+Link Defaults: css-lists-3 (property) counter-increment, css-content-3 (property) string-set
 </pre>
 
 <h2 id='intro'>
@@ -48,7 +48,7 @@ Strong Containment: the 'contain' property</h2>
 	and allows authors to be confident that their page won't accidentally fall into a slow code path
 	due to an innocuous change.
 
-	<dl dfn-type=value dfn-for=containment>
+	<dl dfn-type=value dfn-for=contain>
 		<dt><dfn>none</dfn>
 		<dd>
 			This value indicates that the property has no effect.
@@ -57,7 +57,7 @@ Strong Containment: the 'contain' property</h2>
 
 		<dt><dfn>strict</dfn>
 		<dd>
-			The ''containment/strict'' value indicates that the element is <a>strictly contained</a>,
+			The ''contain/strict'' value indicates that the element is <a>strictly contained</a>,
 			so that its contents are guaranteed to have no effect on the rest of the page outside the element's bounds.
 	</dl>
 
@@ -72,7 +72,7 @@ Strong Containment: the 'contain' property</h2>
 
 		For example, assume a micropost social network had markup something like this:
 
-		<pre class='css'>
+		<pre class='lang-css'>
 			&lt;body>
 				&lt;aside class='sidebar'>...&lt;/aside>
 				&lt;article class='messages'>
@@ -123,13 +123,12 @@ Strong Containment: the 'contain' property</h2>
 
 			<ul>
 				<li>'break-*' (and the related aliases)
-				<li>'page-group'
 				<li>'bookmark-*'
 				<li>'string-set'
 			</ul>
 
 		<li>
-			The 'counter-increment', 'counter-set', 'flow-from', and 'flow-into' properties must be <a title='scoped property'>scoped</a> to the element's sub-tree.
+			The 'counter-increment', 'counter-set', 'flow-from', 'flow-into', and 'content' (for the purpose of ''open-quote''/etc values) properties must be <a lt='scoped property'>scoped</a> to the element's sub-tree.
 	</ol>
 
 	A <dfn export>scoped property</dfn> has its effects scoped to a particular element or subtree.

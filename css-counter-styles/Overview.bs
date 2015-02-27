@@ -3,7 +3,7 @@
 <pre class=metadata>
 Shortname: css-counter-styles
 Level: 3
-Status: CR
+Status: ED
 Group: csswg
 ED: http://dev.w3.org/csswg/css-counter-styles/
 TR: http://www.w3.org/TR/css-counter-styles-3/
@@ -14,8 +14,7 @@ Previous Version: http://www.w3.org/TR/2012/WD-css-counter-styles-3-20121009/
 Editor: Tab Atkins Jr., Google, http://xanthir.com/contact/
 Abstract: This module introduces the ''@counter-style'' rule, which allows authors to define their own custom counter styles for use with CSS list-marker and generated-content counters [[CSS3LIST]]. It also predefines a set of common counter styles, including the ones present in CSS2 and CSS2.1.
 Issue Tracking: Bugzilla https://www.w3.org/Bugs/Public/buglist.cgi?product=CSS&component=Counter%20Styles&resolution=---
-Link Defaults: css-text-3 (dfn) grapheme cluster
-Date: 2014-12-18
+Link Defaults: css-text-3 (dfn) grapheme cluster, css-pseudo-4 (selector) ::marker
 </pre>
 <style>
 pre.stylesheet { white-space: pre-wrap; }
@@ -78,7 +77,7 @@ Counter Styles</h2>
 			or the counter style otherwise can't render the counter value
 	</ul>
 
-	When asked to <dfn export title='generate a counter|generate a counter representation'>generate a counter representation</dfn>
+	When asked to <dfn export lt='generate a counter|generate a counter representation'>generate a counter representation</dfn>
 	using a particular counter style for a particular counter value,
 	follow these steps:
 
@@ -116,7 +115,7 @@ Counter Styles</h2>
 	Note: the prefix and suffix don't play a part in this algorithm.
 	This is intentional;
 	the prefix and suffix aren't part of the string returned by the counter() or counters() functions.
-	Instead, the prefix and suffix are added by the algorithm that constructs the value of the <a property spec=css-ui-3>content</a> property
+	Instead, the prefix and suffix are added by the algorithm that constructs the value of the 'content' property
 	for the ''::marker'' pseudo-element.
 	This also implies that the prefix and suffix always come from the specified counter-style,
 	even if the actual representation is constructed by a fallback style.
@@ -745,7 +744,7 @@ Formatting negative values: the 'negative' descriptor</h3>
 	</div>
 
 	Not all 'system' values use a negative sign.
-	In particular, a counter style <dfn export title="use a negative sign|uses a negative sign">uses a negative sign</dfn>
+	In particular, a counter style <dfn export lt="use a negative sign|uses a negative sign">uses a negative sign</dfn>
 	if its 'system' value is
 	''symbolic'',
 	''system/alphabetic'',
@@ -753,7 +752,7 @@ Formatting negative values: the 'negative' descriptor</h3>
 	''additive'',
 	or ''extends'' if the extended counter style itself <a>uses a negative sign</a>.
 	If a counter style does not <a>use a negative sign</a>,
-	it ignores the negative sign when <a title="generate a counter representation">generating a counter representation</a>.
+	it ignores the negative sign when <a lt="generate a counter representation">generating a counter representation</a>.
 
 <!--
 ████████  ████████  ████████ ████████ ████ ██     ██
@@ -1274,13 +1273,13 @@ Simple Predefined Counter Styles</h2>
 
 	The following stylesheet uses the ''@counter-style'' rule
 	to redefine all of the counter styles defined in CSS 2 and CSS 2.1.
-	This stylesheet is normative -
+	This stylesheet is normative--
 	UAs must include it in their UA stylesheet
 	(or at least act as if these rules were defined at that level).
 
 
 <h3 id='simple-numeric'>
-Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', ''upper-armenian'', ''lower-armenian'', ''bengali'', ''cambodian'', ''khmer'', ''cjk-decimal'', ''devanagiri'', ''georgian'', ''gujarati'', ''gurmukhi'', ''hebrew'', ''kannada'', ''lao'', ''malayalam'', ''mongolian'', ''myanmar'', ''oriya'', ''persian'', ''lower-roman'', ''upper-roman'', ''telugu'', ''thai'', ''tibetan''</h3>
+Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', ''upper-armenian'', ''lower-armenian'', ''bengali'', ''cambodian'', ''khmer'', ''cjk-decimal'', ''devanagari'', ''georgian'', ''gujarati'', ''gurmukhi'', ''hebrew'', ''kannada'', ''lao'', ''malayalam'', ''mongolian'', ''myanmar'', ''oriya'', ''persian'', ''lower-roman'', ''upper-roman'', ''tamil'', ''telugu'', ''thai'', ''tibetan''</h3>
 
 	<dl dfn-type=value dfn-for="<counter-style-name>">
 		<dt><dfn id=decimal>decimal</dfn>
@@ -1325,9 +1324,9 @@ Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', 
 			Han decimal numbers
 			(e.g., 一, 二, 三, ..., 九八, 九九, 一〇〇).
 
-		<dt><dfn>devanagiri</dfn>
+		<dt><dfn>devanagari</dfn>
 		<dd>
-			Devanagiri numbering
+			devanagari numbering
 			(e.g., १, २, ३, ..., ९८, ९९, १००).
 
 		<dt><dfn id=georgian>georgian</dfn>
@@ -1394,6 +1393,11 @@ Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', 
 		<dd>
 			Uppercase ASCII Roman numerals
 			(e.g., I, II, III, ..., XCVIII, XCIX, C).
+
+		<dt><dfn>tamil</dfn>
+		<dd>
+			Tamil numbering
+			(e.g., ௧, ௨, ௩, ..., ௯௮, ௯௯, ௧௦௦).
 
 		<dt><dfn>telugu</dfn>
 		<dd>
@@ -1549,7 +1553,7 @@ Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', 
 	@counter-style persian {
 		system: numeric;
 		symbols: "\6F0" "\6F1" "\6F2" "\6F3" "\6F4" "\6F5" "\6F6" "\6F7" "\6F8" "\6F9";
-		/* ۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹; */
+		/* ۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹ */
 	}
 
 	@counter-style lower-roman {
@@ -1562,6 +1566,12 @@ Numeric: ''decimal'', ''decimal-leading-zero'', ''arabic-indic'', ''armenian'', 
 		system: additive;
 		range: 1 3999;
 		additive-symbols: 1000 M, 900 CM, 500 D, 400 CD, 100 C, 90 XC, 50 L, 40 XL, 10 X, 9 IX, 5 V, 4 IV, 1 I;
+	}
+
+	@counter-style tamil {
+		system: numeric;
+		symbols: "\BE6" "\BE7" "\BE8" "\BE9" "\BEA" "\BEB" "\BEC" "\BED" "\BEE" "\BEF";
+		/* ௦ ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ */
 	}
 
 	@counter-style telugu {
@@ -1797,7 +1807,7 @@ Complex Predefined Counter Styles</h2>
 	For example, an author can reference one of these styles in an ''extends'' system,
 	reusing the algorithm but swapping out some of the other descriptors.
 
-	All of the counter styles defined in this section have a <a title='speak-as' descriptor>spoken form</a> of ''numbers'',
+	All of the counter styles defined in this section have a <a lt='speak-as' descriptor>spoken form</a> of ''numbers'',
 	and <i>use a negative sign</i>.
 
 <!--
@@ -2398,6 +2408,7 @@ Ethiopic Numeric Counter Style: ''ethiopic-numeric''</h3>
 
 	For this system, the name is "ethiopic-numeric",
 	the 'range' is ''1 infinite'',
+	the 'suffix' is <code>"/ "</code> (U+002F SOLIDUS followed by a U+0020 SPACE),
 	and the rest of the descriptors have their initial value.
 
 	<div class="example">
@@ -2426,7 +2437,7 @@ Ethiopic Numeric Counter Style: ''ethiopic-numeric''</h3>
 Additional Predefined Counter Styles</h2>
 
 	The Internationalization Working Group maintains a large list of predefined ''@counter-style'' rules for various world languages
-	in their <a href="http://www.w3.org/TR/predefined-counter-styles/">Predefined Counter Styles</a> document.
+	in their <a href="http://www.w3.org/TR/predefined-counter-styles/">Predefined Counter Styles</a> document. [[predefined-counter-styles]]
 	These additional counter styles are not intended to be supported by user-agents by default,
 	but can be used by users or authors copying them directly into style sheets.
 
@@ -2558,7 +2569,7 @@ Sample style sheet for HTML</h2>
 
 
 <h2 class='no-num' id='changes'>
-Changes since the August 2014 Last CallWorking Draft</h2>
+Changes since the August 2014 Last Call Working Draft</h2>
 
 	* Added additional predefined counter styles to match the set that at least two browsers implement.
 

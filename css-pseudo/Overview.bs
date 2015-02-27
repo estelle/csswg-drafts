@@ -3,7 +3,8 @@
 <pre class='metadata'>
 Shortname: css-pseudo
 Level: 4
-Status: ED
+Status: FPWD
+Date: 2015-01-15
 Group: csswg
 ED: http://dev.w3.org/csswg/css-pseudo-4/
 TR: http://www.w3.org/TR/css-pseudo-4/
@@ -12,7 +13,8 @@ Editor: Daniel Glazman, Disruptive Innovations
 Editor: fantasai, Invited Expert, http://fantasai.inkedblade.net/contact
 Editor: Alan Stearns, Adobe Systems Inc., stearns@adobe.com
 Abstract: This CSS module defines pseudo-elements, abstract elements that represent portions of the CSS render tree that can be selected and styled.
-Ignored Terms: typographic letter unit, Unicode general category, initial-letter
+Ignored Terms: initial-letter
+Link Defaults: css-color-3 (property) color
 </pre>
 
 <h2 id="intro">Introduction</h2>
@@ -50,7 +52,7 @@ The ::first-line pseudo-element</h3>
   <div class="example">
     The rule below means
     “change the letters of the first line of every <code>p</code> element to uppercase”:
-  
+
     <pre>p::first-line { text-transform: uppercase }</pre>
 
     The selector ''p::first-line''
@@ -63,8 +65,8 @@ The ::first-line pseudo-element</h3>
   including the width of the page, the font size, etc.
 
   <div class="example">
-    For example, given an ordinary HTML [[HTML5]] paragraph such as: 
-  
+    For example, given an ordinary HTML [[HTML5]] paragraph such as:
+
     <pre>
       &lt;P&gt;This is a somewhat long HTML
       paragraph that will be broken into several
@@ -73,9 +75,9 @@ The ::first-line pseudo-element</h3>
       will be treated as ordinary lines in the
       paragraph.&lt;/P&gt;
     </pre>
-  
-    The lines might be broken as follows: 
-  
+
+    The lines might be broken as follows:
+
     <pre>
       THIS IS A SOMEWHAT LONG HTML PARAGRAPH THAT
       will be broken into several lines. The first
@@ -86,8 +88,8 @@ The ::first-line pseudo-element</h3>
 
     This paragraph might be “rewritten” by user agents
     to include a <dfn>fictional tag sequence</dfn> to represent ''::first-line''.
-    This <i>fictional tag sequence</i> helps to show how properties are inherited. 
-    
+    This <i>fictional tag sequence</i> helps to show how properties are inherited.
+
     <pre>
       &lt;P&gt;<b>&lt;P::first-line&gt;</b> This is a somewhat long HTML
       paragraph that <b>&lt;/P::first-line&gt;</b> will be broken into several
@@ -104,7 +106,7 @@ The ::first-line pseudo-element</h3>
 
   <div class="example">
     Thus, if we mark up the previous paragraph with a <code>span</code>
-    element encompassing the first sentence: 
+    element encompassing the first sentence:
 
     <pre>
       &lt;P&gt;<b>&lt;SPAN class="test"&gt;</b> This is a somewhat long HTML
@@ -118,7 +120,7 @@ The ::first-line pseudo-element</h3>
     the user agent could simulate start and end tags for <code>span</code>
     when inserting the <i>fictional tag sequence</i> for ''::first-line''
     to get the correct inheritance behavior.
-  
+
     <pre>
       &lt;P&gt;&lt;P::first-line&gt;<b>&lt;SPAN class="test"&gt;</b> This is a somewhat long HTML
       paragraph that will <b>&lt;/SPAN&gt;</b>&lt;/P::first-line&gt;<b>&lt;SPAN class="test"&gt;</b> be broken into several
@@ -152,20 +154,20 @@ Finding the First Formatted Line</h4>
   Note: Note that the first line of the <code>p</code> in this fragment:
   <code>&lt;p&gt;&lt;br&gt;First...</code>
   doesn't contain any letters (assuming the default style for <code>br</code>).
-  The word "First" is not on the first formatted line. 
+  The word "First" is not on the first formatted line.
 
   A user agent must act as if the fictional start tags of a ''::first-line'' pseudo-element
   were nested just inside the innermost enclosing block-level element.
 
   <div class="example">
-    For example, the <i>fictional tag sequence</i> for 
+    For example, the <i>fictional tag sequence</i> for
     <pre>
       &lt;DIV&gt;
         &lt;P&gt;First paragraph&lt;/P&gt;
         &lt;P&gt;Second paragraph&lt;/P&gt;
       &lt;/DIV&gt;
     </pre>
-    is 
+    is
     <pre>
       &lt;DIV&gt;
         &lt;P&gt;&lt;DIV::first-line&gt;&lt;P::first-line&gt;First paragraph&lt;/P::first-line&gt;&lt;/DIV::first-line&gt;&lt;/P&gt;
@@ -201,7 +203,7 @@ Inheritance and the ''::first-line'' Pseudo-element</h4>
   For all other properties inheritence is
   from the non-pseudo-element parent of the first line pseudo element.
   (The portion of a child element that does not occur on the first line
-  always inherits from the parent of that child.) 
+  always inherits from the parent of that child.)
 
 <h3 id="first-letter-pseudo">
 The ::first-letter pseudo-element</h3>
@@ -251,7 +253,7 @@ The ::first-letter pseudo-element</h3>
   If the characters that would form the ''::first-letter''
   are not in the same element, such as "‘<code class="css">T" in <code>&lt;p&gt;'&lt;em&gt;T...</code>,
   the user agent may create a ''::first-letter'' pseudo-element
-  from one of the elements, both elements, or simply not create a pseudo-element.</code> 
+  from one of the elements, both elements, or simply not create a pseudo-element.</code>
   Additionally, if the first letter(s) of the block
   are not at the start of the line (for example due to bidirectional reordering),
   then the user agent need not create the pseudo-element(s).
@@ -282,7 +284,7 @@ Finding the First Letter</h4>
 
   <div class="example">
     Example:
-    The <i>fictional tag sequence</i> for this HTML fragment: 
+    The <i>fictional tag sequence</i> for this HTML fragment:
     <pre>
       &lt;div&gt;
       &lt;p&gt;The first text.
@@ -298,7 +300,7 @@ Finding the First Letter</h4>
   cannot be the first letter of an ancestor element.
   Thus, in <code>&lt;DIV&gt;&lt;P STYLE="display: inline-block"&gt;Hello&lt;BR&gt;Goodbye&lt;/P&gt; etcetera&lt;/DIV&gt;</code>
   the first letter of the <code>DIV</code> is not the letter "H".
-  In fact, the <code>DIV</code> doesn't have a first letter. 
+  In fact, the <code>DIV</code> doesn't have a first letter.
   If an element is a list item (''display: list-item''),
   the ''::first-letter'' applies
   to the first letter in the principal box <em>after</em> the marker.
@@ -318,7 +320,7 @@ Finding the First Letter</h4>
 Styling the ''::first-letter'' Pseudo-element</h4>
 
   In CSS a ::first-letter pseudo-element is similar to an inline-level element
-  if its 'float' property is ''none'';
+  if its 'float' property is ''float/none'';
   otherwise, it is similar to a floated element.
   The following properties that apply to ''::first-letter'' pseudo-elements:
 
@@ -337,14 +339,14 @@ Styling the ''::first-letter'' Pseudo-element</h4>
 
   User agents may apply other properties as well.
 
-  Note: In previous levels of CSS, 
-  User Agents were allowed to choose a line height, width and height based on the shape of the letter, 
+  Note: In previous levels of CSS,
+  User Agents were allowed to choose a line height, width and height based on the shape of the letter,
   approximate font sizes,
-  or to take the glyph outline into account when formatting. 
-  This possibility has been intentionally removed, 
-  as it proved to be a poor solution for the intended use case (Drop Caps), 
-  yet caused interoperability problems. 
-  
+  or to take the glyph outline into account when formatting.
+  This possibility has been intentionally removed,
+  as it proved to be a poor solution for the intended use case (Drop Caps),
+  yet caused interoperability problems.
+
   <div class="example">
     Example:
     This CSS and HTML example shows a possible rendering of an initial cap.
@@ -352,7 +354,7 @@ Styling the ''::first-letter'' Pseudo-element</h4>
     is inside the <span>span</span>,
     and thus the font weight of the first letter is normal,
     not bold as the <span>span</span>:
-  
+
     <pre>
       p { line-height: 1.1 }
       p::first-letter { font-size: 3em; font-weight: normal }
@@ -363,7 +365,7 @@ Styling the ''::first-letter'' Pseudo-element</h4>
       En arme burgery, en op mijn volcx gebed&lt;br&gt;
       En dagelix geschrey de bange stad ontzet.
     </pre>
-    
+
     <div class="figure">
         <img alt="Image illustrating the ::first-letter pseudo-element" src="http://www.w3.org/TR/selectors/initial-cap.png">
     </div>
@@ -416,65 +418,42 @@ Styling the ''::first-letter'' Pseudo-element</h4>
   </div>
 
 <h2 id="highlight-pseudos">
-Highlight Range Pseudo-element: ''::selection''</h2>
+Highlight Pseudo-elements</h2>
 
-  The <dfn>::selection</dfn> pseudo-element represents
-  the portion of a document that has been highlighted by the user.
-  This also applies, for example, to selected text within an editable text field.
+<h3 id="highlight-selectors">
+Selecting Highlighted Content: the ''::selection'', ''::spelling-error'', and ''::grammar-error'' pseudo-elements</h3>
 
-  Issue: We want to add other types of selections, such as spelling-error highlights.
+  The <dfn>highlight pseudo-elements</dfn>
+  represent portions of a document that have been highlighted in some way.
 
-  Issue: Active vs. inactive selections are often styled differently. Currently no way to distinguish.
+  <dl export>
+    <dt><dfn>::selection</dfn>
+    <dd>
+      The <a>::selection</a> pseudo-element represents
+      the portion of a document that has been highlighted by the user.
+      This also applies, for example, to selected text within an editable text field.
 
-  <p>The <dfn>root highlight</dfn> is a multi-piece overlay
-  over the entire tree,
-  portions of which are selected and correspond to the ''::selection'' pseudo-element.
-  Each box owns the piece of of the overlay corresponding to any text or replaced content
-  directly contained by the box.
-  For text, the corresponding overlay must cover at least the entire em box
-  and may extend further above/below the em box to the line box edges.
-  Spacing between two characters may also be part of the overlay,
-  in which case it belongs to the innermost element that contains both characters
-  and is selected when both characters are selected
-  For replaced content, the associated overlay must cover at least the entire replaced object,
-  and may extend outward to include the element's entire content box.
-  The overlay may also include other other areas within the border-box of an element;
-  in this case, those areas belong to the innermost such element that contains the area.
+      Issue: Active vs. inactive selections are often styled differently. Currently no way to distinguish.
 
-  Issue: See
-  <a href="http://lists.w3.org/Archives/Public/www-style/2008Nov/0022.html">F2F minutes</a>,
-  <a href="http://lists.w3.org/Archives/Public/www-style/2008Oct/0268.html">dbaron's message</a>,
-  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0247.html">Daniel's thread</a>,
-  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0261.html">Gecko notes</a>,
-  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0366.html">Opera notes</a>,
-  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0280.html">Webkit notes</a>
+    <dt><dfn>::spelling-error</dfn>
+    <dd>
+      The <a>::spelling-error</a> pseudo-element represents
+      a portion of text that has been flagged by the user agent as misspelled.
 
-  Each element draws its own portion of the highlighted overlay,
-  which receives the styles specified by the ''::selection'' pseudo-element styles
-  for which it or one of its ancestors is the <i>originating element</i>.
-  When multiple styles conflict,
-  the winning style is the one belonging to the innermost element
-  after cascading.
+    <dt><dfn>::grammar-error</dfn>
+    <dd>
+      The <a>::grammar-error</a> pseudo-element represents
+      a portion of text that has been flagged by the user agent as grammatically incorrect.
+  </dl>
 
-  Issue: This could alternately be described in terms of inheritance.
-  So, how do we want ''inherit'' to behave here?
-  Should it inherit from the parent ''::selection''
-  or the <i>originating element</i>?
-  Opera does the former, Gecko/Blink the latter.
-
-  <p class="advisement">
-  Authors wanting multiple selections styles should use
-  <strong>'':root::selection''</strong>
-  for their document-wide selection style,
-  since this will allow clean overriding in descendants.
-  (''::selection'' alone would apply to every element in the tree,
-  overriding the more specific styles of any ancestors.)
+  Note: A future level of CSS may introduce ways to create
+  custom highlight pseudo-elements.
 
 <h3 id="highlight-styling">
-Styling Highlighted Ranges</h3>
+Styling Highlights</h3>
 
-  The following properties apply to ''::selection'' pseudo-elements:
-  
+  The following properties apply to the <a>highlight pseudo-elements</a>:
+
   <ul>
     <li>'color'
     <li>'background-color'
@@ -494,10 +473,9 @@ Styling Highlighted Ranges</h3>
   If 'color' is not specified, the text (and text decoration)'s
   unselected color must be used for the highlight.
   (As usual, the initial 'background-color' is ''transparent''.)
-
   Issue: Can we reuse ''currentColor'' for this, now that it computes to itself?
 
-  The UA should use the OS-default selection color
+  The UA should use the OS-default highlight colors
   when neither 'color' nor 'background-color' has been specified by the author.
 
   Note: This paired-cascading behavior
@@ -506,22 +484,109 @@ Styling Highlighted Ranges</h3>
   However it has been interoperably implemented in browsers
   and is thus probably a Web-compatibility requirement.
 
+  The 'color' property specifies the color of both the text
+  and all line decorations (underline, overline, line-through)
+  applied to the text.
+  Note: Because 'text-emphasis-color' defaults to ''currrentColor'',
+  it will by default also set the color of the the emphasis marks.
+
+<h3 id=highlight-bounds>
+Area of a Highlight</h3>
+
+  <p>For each instance of highlighting
+  there exists a <dfn>root highlight overlay</dfn>
+  which is a tesselated overlay
+  over the entire tree,
+  the actively-highlighted portions of which are represented
+  by the corresponding <a>highlight pseudo-element</a>.
+  The ''::selection'' overlay is drawn
+  over the ''::spelling-error'' overlay
+  which is drawn over the ''::grammar-error'' overlay.
+
+
+  Each box owns a piece of the overlay corresponding to any text or replaced content
+  directly contained by the box.
+
+  <ul>
+    <li>
+      For text, the corresponding overlay must cover at least the entire em box
+      and may extend further above/below the em box to the line box edges.
+      Spacing between two characters may also be part of the overlay,
+      in which case it belongs to the innermost element that contains both characters
+      and is selected when both characters are selected.
+    <li>
+      For replaced content, the associated overlay must cover at least the entire replaced object,
+      and may extend outward to include the element's entire content box.
+    <li>
+      The overlay may also include other other areas within the border-box of an element;
+      in this case, those areas belong to the innermost such element that contains the area.
+  </ul>
+
+  Issue: See
+  <a href="http://lists.w3.org/Archives/Public/www-style/2008Nov/0022.html">F2F minutes</a>,
+  <a href="http://lists.w3.org/Archives/Public/www-style/2008Oct/0268.html">dbaron's message</a>,
+  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0247.html">Daniel's thread</a>,
+  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0261.html">Gecko notes</a>,
+  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0366.html">Opera notes</a>,
+  <a href="http://lists.w3.org/Archives/Public/www-style/2010May/0280.html">Webkit notes</a>
+
+  Issue: Not sure if this is the correct way of describing the way things work.
+
+<h3 id=highlight-cascade>
+Cascading and Per-Element Highlight Styles</h3>
+
+  Each element draws its own portion of the <a>root highlight overlay</a>,
+  which receives the styles specified by the <a>highlight pseudo-element</a> styles
+  for which it or one of its ancestors is the <i>originating element</i>.
+  When multiple styles conflict,
+  the winning style is the one belonging to the innermost element
+  after cascading.
+
+  <div class="example">
+    For example, if the following rules were applied:
+    <pre>
+      p::selection { background: green; color: yellow; }
+      em::selection { color: orange; }
+    </pre>
+    to the following markup:
+    <pre>
+      &lt;p>Highlight this <em>and this</em>.&lt;/p>
+    </pre>
+    The highlight would be green throughout,
+    with a yellow text outside the <code>&lt;em></code> element
+    and a orange text inside it.
+  </div>
+
+  Issue: This could alternately be described in terms of inheritance.
+  The observable differences would be in how ''inherit'' and ''unset'' behave.
+  Should it inherit from the parent ''::selection''
+  or the <i>originating element</i>?
+  Opera does the former, Gecko/Blink the latter.
+
+  <p class="advisement">
+  Authors wanting multiple selections styles should use
+  <strong>'':root::selection''</strong>
+  for their document-wide selection style,
+  since this will allow clean overriding in descendants.
+  (''::selection'' alone would apply to every element in the tree,
+  overriding the more specific styles of any ancestors.)
+
+<h3 id="highlight-painting">
+Painting the Highlight</h3>
+
   The ''::selection'' pseudo element draws its background
   over the selected portion of the element,
   immediately below any positioned descendants
   (i.e. just before step 8 in <a href="http://www.w3.org/TR/CSS21/zindex.html">CSS2.1&sect;E.2</a>).
   It also suppresses the drawing of any selected text
+  (and any text decorations applied to that text)
   and instead redraws that text
-  (and any text decorations)
+  (and its decorations)
   over that background
   using the specified 'color'.
 
-  Issue: Implementations seem to redraw text decorations and text shadows over the selection background.
-  This seems particularly weird if the text decoration color doesn't match the text.
-  Perhaps the only thing visible should be the text itself (unless the background is transparent)
-  and any text decorations specified for the selection itself.
-  (Alternately the decorations should get the color of the selected text,
-  not the unselected text.)
+  Issue: What should happen with text shadows?
+  Drawing them in their original color is disconcerting if that color is not a shade of gray.
 
   For non-replaced content, the UA must honor the 'color' and 'background-color'
   (including their alpha channels) as specified.
@@ -531,16 +596,29 @@ Styling Highlighted Ranges</h3>
   else the specified 'color';
   however the UA may adjust the alpha channel if it is opaque.
 
-  Issue: This whole section needs vocabulary cleanup.
+<h3 id="highlight-security">
+Security Considerations</h3>
 
-<h2 id="generated-content">
-Generated Content Pseudo-elements: ''::before'' and ''::after''</h2>
+  Because the styling of spelling and grammar errors
+  can leak information about the contents of a user's dictionary
+  (which can include the user's name and even includes the contents of his/her address book!)
+  UAs that implement ''::spelling-error'' and ''::grammar-error''
+  must prevent pages from being able to read
+  the styling of such highlighted segments.
 
-  When their computed 'content' value is not ''none'',
+<h2 id="treelike">
+Tree-Abiding Pseudo-elements</h2>
+
+  These pseudo-elements always fit within the box tree.
+
+<h3 id="generated-content">
+Generated Content Pseudo-elements: ''::before'' and ''::after''</h3>
+
+  When their computed 'content' value is not ''content/none'',
   these pseudo-elements generate boxes
   as if they were immediate children of their <i>originating element</i>,
   and can be styled exactly like any normal document-sourced element in the document tree.
-  They <i title="inheritance">inherit</i> any inheritable properties from their <i>originating element</i>;
+  They <i lt="inheritance">inherit</i> any inheritable properties from their <i>originating element</i>;
   non-inheritable properties take their <i>initial values</i> as usual.
   [[CSS3CASCADE]]
 
@@ -561,7 +639,7 @@ Generated Content Pseudo-elements: ''::before'' and ''::after''</h2>
 
     <pre>p.note::before { content: "Note: " }</pre>
 
-    Since the initial value of 'display' is ''inline'',
+    Since the initial value of 'display' is ''display/inline'',
     this will generate an inline box.
     Like other inline children of <code>&lt;p></code>,
     it will participate in <code>&lt;p></code>’s inline formatting context,
@@ -578,7 +656,58 @@ Generated Content Pseudo-elements: ''::before'' and ''::after''</h2>
   (<code>:before</code> and <code>:after</code>)
   for these pseudo-elements.
 
-<h2 id="interactions">Overlapping Pseudo-element Interactions</h2>
+<h3 id="marker-pseudo">
+List Markers: the ''::marker'' pseudo-element</h3>
+
+  The <dfn>::marker</dfn> pseudo-element represents
+  the automatically generated marker box of a list item.
+  (See ''display: list-item''.)
+
+  The following CSS properties apply to a ''::first-line'' pseudo-element:
+  <ul>
+    <li>all font properties (see [[CSS3-FONTS]])
+    <li>the 'color' property (see [[CSS3COLOR]])
+  </ul>
+
+  <p class="note">
+    It is expected that future specifications will extend this list of properties;
+    however at the moment marker box layout is not fully defined,
+    so only these properties are allowed.
+
+<h3 id="placeholder-pseudo">
+Placeholder Input: the ''::placeholder'' pseudo-element</h3>
+
+  The <dfn>::placeholder</dfn> pseudo-element represents
+  placeholder text in an input field:
+  text that represents the input
+  and provides a hint to the user on how to fill out the form.
+  For example, a date-input field
+  might have the placeholder text “YYYY/MM/DD”
+  to clarify that numeric dates are to be entered in year-month-day order.
+
+  All properties that apply to the ''::first-line'' pseudo-element
+  also apply to the ''::placeholder'' pseudo-element.
+
+  In interactive media, placeholder text is often hidden once the user has entered input;
+  however this is not a requirement, and both the input value and the placeholder text may be visible simultaneously.
+  The exact behavior is UA-defined.
+  Note that in static media (such as print)
+  placeholder text will be present even after the user has entered input.
+
+  Issue: Current bikeshedding, based on implementations and discussions,
+  appears to select from the list
+  <code>::placeholder</code>,
+  <code>::placeholder-text</code>,
+  <code>::input-placeholder</code>.
+  The WG is going with <code>::placeholder</code>.
+  If there are other opinions that provide some kind of argument to the contrary,
+  they should go to <a href="http://lists.w3.org/Archives/Public/www-style/">www-style@w3.org</a>.
+
+  Issue: Authors seem to want 'text-align' on the list of supported properties.
+  See e.g. <a href="http://css-tricks.com/almanac/selectors/p/placeholder/">comments here</a>.
+
+<h2 id="interactions">
+Overlapping Pseudo-element Interactions</h2>
 
   <div class="example" id="overlapping-example">
     Recall that
@@ -601,7 +730,7 @@ Generated Content Pseudo-elements: ''::before'' and ''::after''</h2>
       p { color: red; font-size: 12pt }
       p::first-letter { color: green; font-size: 200% }
       p::first-line { color: blue }
-      
+
       &lt;P&gt;Some text that ends up on two lines&lt;/P&gt;
     </pre>
 
@@ -629,9 +758,14 @@ Additions to the CSS Object Model</h2>
   Pseudo-elements should be reachable by script,
   stylable from script,
   and available as event targets.
-  
+
   <p class="note"><span class="note-prefix">Note </span>We may extend this
     section in the future to allow creation of pseudo-elements from script.
+
+  Issue: This entire section is a starting point for discussion.
+  Feedback is welcome.
+  Implementations, at this point, are not,
+  as we are not yet sure of our approach.
 
 <h3 id="CSSPseudoElement-interface">
 Interface CSSPseudoElement</h3>
@@ -683,9 +817,9 @@ Interface CSSPseudoElement</h3>
   that allows directly setting style information (inline styles) onto the pseudo-element.
   Inline styles on a <code>CSSPseudoElement</code> have precedence over all
   style rules styling that pseudo-element.
-  
+
   Issue: This should cascade like actual inline styles, not be a different thing.
-  
+
   The <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget"><code>EventTarget</code></a> interface [[!DOM-LEVEL-2-EVENTS]]
   must be implemented by all instances of <code>CSSPseudoElement</code>
   as a conformance requirement of this module.
@@ -747,7 +881,7 @@ Acknowledgements</h2>
 
   The editors would like to thank the following individuals for their
   contributions, either during the conception of the specification or during
-  its development and specification review process: 
+  its development and specification review process:
   Tab Atkins,
   David Baron,
   Razvan Caliman,

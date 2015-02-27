@@ -11,6 +11,6 @@ cssom-view/Overview.src.html
 
 *.DS_Store
 *.orig
-.gitignore
 .git/*
 
+*/Overview.html
