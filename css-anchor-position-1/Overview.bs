@@ -896,7 +896,7 @@ Centering on the Anchor: the ''anchor-center'' value {#anchor-center}
 ------------------------------------------------------------------------
 
 <pre class=propdef>
-Name: justify-self, align-self, justify-items, align-items
+Name: justify-self, align-self, place-self, justify-items, align-items, place-items
 New Values: anchor-center
 </pre>
 
@@ -909,7 +909,7 @@ but a common case for anchored positioning--
 centering over the anchor element--
 requires careful and somewhat complex set-up to achieve.
 
-The new <dfn value for="justify-self, align-self, justify-items, align-items">anchor-center</dfn> value
+The new <dfn value for="justify-self, align-self, place-self, justify-items, align-items, place-items">anchor-center</dfn> value
 makes this case extremely simple:
 if the positioned element has a [=default anchor element=],
 then it is aligned so as to center itself
